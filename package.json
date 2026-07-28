@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/poll.js",
     "test:vision": "node scripts/test_inspect_product_quality.js",
-    "test:followups": "node scripts/test_automate_followups.js"
+    "test:followups": "node scripts/test_automate_followups.js",
+    "view": "node scripts/view.js"
   },
   "dependencies": {
     "dotenv": "^17.3.1",
