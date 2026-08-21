@@ -4,3 +4,11 @@ node_modules/
 !.env*.example
 storage/
 apikey.txt
+
+# fotos sueltas para `npm run demo` (input local, nunca se comitean)
+/*.jpg
+/*.jpeg
+/*.png
+
+# proyecto 100% Node/JS: cualquier .py suelto aquí es de otro repo por error
+*.py

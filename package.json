@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node src/poll.js",
     "test:vision": "node scripts/test_inspect_product_quality.js",
+    "test:alignment": "node scripts/test_image_alignment.js",
     "test:followups": "node scripts/test_automate_followups.js",
-    "view": "node scripts/view.js"
+    "view": "node scripts/view.js",
+    "demo": "node scripts/demo_real_photo.js"
   },
   "dependencies": {
     "dotenv": "^17.3.1",

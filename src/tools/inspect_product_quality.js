@@ -21,7 +21,10 @@ export const meta = {
 const DEFAULT_THRESHOLDS = {
   similarityMin: 0.94,
   defectConfidenceMin: 0.85,
-  maxDiffAreaRatio: 0.03
+  maxDiffAreaRatio: 0.03,
+  alignmentMaxShift: 10, // px de tolerancia a que la pieza no quede perfectamente centrada (grilla 256x256)
+  alignmentMaxRotationDeg: 8, // grados de tolerancia a que la pieza no quede perfectamente orientada
+  alignmentRotationStepDeg: 2
 };
 
 export async function handler (event) {
@@ -64,7 +67,10 @@ export async function handler (event) {
   const { similarityScore, diffAreaRatio, boundingBox, evidenceBuffer } = await compare({
     templateRef: template.image_ref,
     frameRef: imageRef,
-    maskRef: template.mask_ref
+    maskRef: template.mask_ref,
+    maxShift: thresholds.alignmentMaxShift,
+    maxRotationDeg: thresholds.alignmentMaxRotationDeg,
+    rotationStepDeg: thresholds.alignmentRotationStepDeg
   });
 
   const passed = similarityScore >= thresholds.similarityMin && diffAreaRatio <= thresholds.maxDiffAreaRatio;

@@ -12,7 +12,12 @@ import * as inspectProductQuality from './tools/inspect_product_quality.js';
 import * as automateFollowups from './tools/automate_followups.js';
 
 const POLL_INTERVAL_MS = Number(process.env.POLL_INTERVAL_MS || 5000);
-const TOOLS = [inspectProductQuality, automateFollowups];
+const ALL_TOOLS = { inspect_product_quality: inspectProductQuality, automate_followups: automateFollowups };
+// TOOL_IDS filtra qué tools corre este proceso (ej. "inspect_product_quality").
+// Sin definir, corre las dos — así el default local (npm run start) no cambia;
+// en Railway cada servicio (un servicio por tool) fija su propio TOOL_IDS.
+const TOOLS = (process.env.TOOL_IDS ? process.env.TOOL_IDS.split(',') : Object.keys(ALL_TOOLS))
+  .map((id) => ALL_TOOLS[id.trim()]);
 
 // GET /events y /events/subscriptions/:id devuelven la fila "plana" de la
 // tabla (module_id, asset_id, event_type...), no el sobre anidado que espera
